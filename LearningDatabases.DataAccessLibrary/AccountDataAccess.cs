@@ -15,7 +15,7 @@ public class AccountDataAccess
     public IEnumerable<Account> GetAllAccounts()
     {
         //NOTE: we're declaring and instantiating variables using the "using" keyword
-        //which closes and releases memory 
+        //which closes and releases memory implicitly
         try
         {
             //Instantiate a connection object which points to the correct server and database, based on the connection string
@@ -33,11 +33,13 @@ public class AccountDataAccess
                 //create an account object
                 var account = new Account()
                 {
+                    //grab the values from the tuple
+                    //and insert them in the Account object
                     Id = (int)datareader["Id"],
                     Name = (string)datareader["Name"],
                     Balance = (decimal)datareader["Balance"]
                 };
-                accounts.Add(account); //add it to the list
+                accounts.Add(account); //add the new account to the list
             }
             return accounts; //return the list
         }
